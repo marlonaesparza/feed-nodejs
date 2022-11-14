@@ -1,19 +1,19 @@
-const express = require('express');
+const router = require('express').Router();
 const PostBusiness = require('./../business/post');
-const postRouter = express.Router();
 
 
-postRouter.get('/all', (req, res) => {
+router.get('/all', (req, res) => {
   return PostBusiness.getAllPosts(req, res);
 });
 
-postRouter.post('/create', (req, res) => {
+router.post('/create', (req, res) => {
+  console.log('Base Rotuer (create)...');
   return PostBusiness.createPost(req, res);
 });
 
-postRouter.delete('/delete', (req, res) => {
+router.delete('/delete', (req, res) => {
   return PostBusiness.deletePost(req, res);
 });
 
 
-module.exports = postRouter;
+module.exports = router;

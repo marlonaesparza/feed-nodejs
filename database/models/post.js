@@ -11,14 +11,9 @@ const Post = connection.define('Post', {
   userUUID: {
     type: sequelize.DataTypes.STRING,
     allowNull: false,
-    unique: true
-  },
-  postID: {
-    type: sequelize.DataTypes.STRING,
-    allowNull: false,
     unique: false
   },
-  postURL: {
+  postID: {
     type: sequelize.DataTypes.STRING,
     allowNull: false,
     unique: false

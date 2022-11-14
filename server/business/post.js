@@ -3,7 +3,6 @@ const PostDAO = require('./../dao/post');
 
 class PostBusiness {
   constructor() {
-    this.getPost = this.createPost.bind(this);
     this.createPost = this.createPost.bind(this);
     this.deletePost = this.deletePost.bind(this);
     this.getAllPosts = this.getAllPosts.bind(this);
@@ -23,7 +22,7 @@ class PostBusiness {
       });
   };
 
-  deletePost(req, res, postInfo) {
+  deletePost(req, res) {
     const postInfo = req.body;
 
     return PostDAO.deletePost(postInfo)
@@ -38,8 +37,8 @@ class PostBusiness {
   };
 
   getAllPosts(req, res) {
-    const postInfo = req.params;
-
+    const postInfo = req.query;
+    console.log('GET ALL POST PARAMS:', postInfo);
     return PostDAO.getAllPosts(postInfo)
       .then(result => {
         console.log('PostBusiness (getAll):', result);

@@ -3,36 +3,37 @@ const Post = require('../../database/models/post');
 
 class PostDAO {
   constructor() {
-    this.getPost = this.createPost.bind(this);
+    this.getPost = this.getPost.bind(this);
     this.createPost = this.createPost.bind(this);
     this.deletePost = this.deletePost.bind(this);
     this.getAllPosts = this.getAllPosts.bind(this);
   };
 
   getPost({ userUUID, postID }) {
+    console.log('PostDAO get post call:', userUUID, postID);
     return Post.findOne({ where: {
       userUUID,
       postID
     }})
       .then(result => {
-        console.log('PostDAO (get):', result);
+        console.log('PostDAO get post result:', result);
         return result;
       });
   };
 
   createPost(post) {
+    console.log('PostDAO create post:', post);
     return this.getPost(post)
       .then(result => {
         if (result) {
-          console.log('PostDAO 1 (create):', result);
           throw result;
         };
 
-        console.log('PostDAO 2 (create):', 'No post found. Creat new post.');
+        console.log('PostDAO create post:', 'No post found. Creat new post.');
         return Post.create(post);
       })
       .then(result => {
-        console.log('PostDAO 3 (create):', result);
+        console.log('PostDAO create post result:', post);
         return result;
       });
   };
@@ -44,7 +45,7 @@ class PostDAO {
           throw result;
         };
 
-        console.log('PostDAO 2 (create):', 'No post found. Creat new post.');
+        console.log('PostDAO delete post:', 'No post found. Creat new post.');
         return Post.destroy({ where: {
           userUUID,
           postID
@@ -59,7 +60,7 @@ class PostDAO {
           throw result;
         };
 
-        console.log('PostDAO 1 (getAll):', result);
+        console.log('PostDAO get all:', result);
         return result;
       });
   };
