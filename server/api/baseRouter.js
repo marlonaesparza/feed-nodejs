@@ -6,6 +6,10 @@ router.get('/all', (req, res) => {
   return PostBusiness.getAllPosts(req, res);
 });
 
+router.get('/getMostRecentByOffset', (req, res) => {
+  return PostBusiness.getMostRecentByOffset(req, res);
+});
+
 router.post('/create', (req, res) => {
   console.log('Base Rotuer (create)...');
   return PostBusiness.createPost(req, res);

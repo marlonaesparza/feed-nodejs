@@ -49,7 +49,19 @@ class PostBusiness {
         return res.status(400).send({});
       });
   };
-}
+
+  getMostRecentByOffset(req, res) {
+    const params = req.query;
+    return PostDAO.getMostRecentByOffset(params)
+      .then(mostRecentByOffset => {
+        return res.status(200).send(mostRecentByOffset)
+      })
+      .catch(error => {
+        return res.status(400).send(error)
+      });
+  };
+
+};
 
 
 module.exports = new PostBusiness;

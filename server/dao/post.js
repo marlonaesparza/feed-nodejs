@@ -64,6 +64,32 @@ class PostDAO {
         return result;
       });
   };
+
+  getMostRecentByOffset(params) {
+    let offset = params.offset || 0;
+    let uuids = params.uuids || [];
+
+    return Post.findAll({
+      where: {
+        userUUID: uuids
+      },
+      offset: offset,
+      limit: 12,
+      order: [['createdAt', 'DESC']]
+    })
+      .then((results) => {
+        console.log('Get Most Recent By Offset (results):', results);
+        const mostRecentByOffset = results.map((post) => {
+          return post.dataValues;
+        });
+
+        return mostRecentByOffset;
+      })
+      .catch((error) => {
+        console.log('Get Most Recent By Offset (error):', error);
+        return [];
+      });
+  }
 };
 
 
